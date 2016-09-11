@@ -4,7 +4,7 @@ angular.module('github-crew.services', [])
 
   return {
     all: function() {
-      return $http.get('https://github-crew.herokuapp.com/api/advisor/hyrrt?access_token=7bc47a4d71b8322bc9a5fddd873f3e4c6a1563ea90c&max=10');
+      return $http.get('https://github-crew.herokuapp.com/api/advisor/tgtfrr?access_token=681a4a88tt69ab20dfde752b9481e9dcb2b5cf9653&max=10');
     },
     repos:function(url){
         return $http.get(url);

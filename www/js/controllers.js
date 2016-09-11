@@ -2,9 +2,10 @@ angular.module('github-crew.controllers', [])
 
 .controller('AboutCtrl', function($scope) {})
 
-.controller('PeopleCtrl', function($scope, $rootScope, PeopleService) {
+.controller('PeopleCtrl', function($scope, $rootScope, $ionicPopup,  PeopleService) {
 
   $rootScope.people = [];
+  $scope.firtsLoading = true;
 
   $scope.remove = function(profile) {
     $rootScope.people.splice($scope.people.indexOf(profile), 1);
@@ -15,19 +16,26 @@ angular.module('github-crew.controllers', [])
         function(response){
               $rootScope.people = response.data;
         }, function(data){
-            console.log("error",data)
+          $ionicPopup.alert({
+             title: 'github-crew',
+             template: 'error loading people list'
+           });
       }).finally(function() {
        $scope.$broadcast('scroll.refreshComplete');
+       if($scope.firtsLoading){
+         $scope.firtsLoading = false;
+       }
      });
   };
 
   $scope.refreshPeopleData();
 })
 
-.controller('ProfileDetailCtrl', function($scope, $http, $rootScope, $stateParams, PeopleService) {
+.controller('ProfileDetailCtrl', function($scope, $http, $rootScope, $ionicPopup, $stateParams, PeopleService) {
 
       $scope.profile = {};
       $scope.repos = [];
+
       $scope.showProfile = function(){
         $scope.repos = [];
         if($rootScope.people){
@@ -40,7 +48,10 @@ angular.module('github-crew.controllers', [])
                     function(response){
                           $scope.repos = response.data;
                     }, function(data){
-                        console.log("error",data)
+                      $ionicPopup.alert({
+                         title: 'github-crew',
+                         template: 'error loading repo list'
+                       });
                   });
 
                 return;

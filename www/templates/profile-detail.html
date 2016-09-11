@@ -23,6 +23,7 @@
   <div class="item item-divider">
     Repositories
   </div>
+  <ion-spinner ng-if="repoLoading" class="centered-spinner scroll"></ion-spinner>
     <li class="item" ng-repeat="repo in repos" ng-click="">
       <h2>{{repo.name}}</h2>
       <p>{{repo.description}}</p>
