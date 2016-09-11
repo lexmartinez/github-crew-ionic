@@ -1,0 +1,36 @@
+
+<ion-view view-title="Github Profile">
+
+  <ion-content class="padding">
+
+<div class="list card">
+
+  <div class="item item-avatar">
+    <img ng-src="{{profile.avatar_url}}">
+    <h2>{{profile.login}}</h2>
+    <p>{{profile.html_url}}</p>
+  </div>
+
+  <div class="item item-image">
+    <img ng-src="{{profile.avatar_url}}">
+
+    <button class="button button-block button-light" style="color:#2980b9">
+      <i class="icon ion-ios-checkmark"></i>&nbsp;Follow Profile
+    </button>
+  </div>
+
+  <ul class="list">
+  <div class="item item-divider">
+    Repositories
+  </div>
+    <li class="item" ng-repeat="repo in repos" ng-click="">
+      <h2>{{repo.name}}</h2>
+      <p>{{repo.description}}</p>
+      <p>{{repo.html_url}}</p>
+    </li>
+  </ul>
+
+</div>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,20 @@
+<ion-view view-title="People">
+  <ion-content>
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+          on-refresh="refreshPeopleData()">
+  </ion-refresher>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="profile in people" type="item-text-wrap" href="#/tab/people/{{profile.id}}">
+        <img ng-src="{{profile.avatar_url}}">
+        <h2>{{profile.login}}</h2>
+        <p>{{profile.html_url}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(profile)">
+          Discard
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
