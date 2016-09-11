@@ -6,13 +6,15 @@ angular.module('github-crew.controllers', [])
 
   $rootScope.people = [];
   $scope.firtsLoading = true;
+  $rootScope.token = '681a4a8869ab20dfde752b9481e9dcb2b5dacf9653';
+  $rootScope.username = "asdasjndasudasn";
 
   $scope.remove = function(profile) {
-    $rootScope.people.splice($scope.people.indexOf(profile), 1);
+    $rootScope.people.splice($rootScope.people.indexOf(profile), 1);
   };
 
   $scope.refreshPeopleData = function(){
-    PeopleService.all().then(
+    PeopleService.all($rootScope.username,$rootScope.token).then(
         function(response){
               $rootScope.people = response.data;
         }, function(data){
@@ -35,6 +37,7 @@ angular.module('github-crew.controllers', [])
 
       $scope.profile = {};
       $scope.repos = [];
+      $scope.enableButton = false;
 
       $scope.showProfile = function(){
         $scope.repos = [];
@@ -43,7 +46,7 @@ angular.module('github-crew.controllers', [])
            for(var i=0;i<$rootScope.people.length;i++){
              if($rootScope.people[i].id == id){
                 $scope.profile = $rootScope.people[i];
-
+                $scope.enableButton = true;
                 PeopleService.repos($scope.profile.repos_url).then(
                     function(response){
                           $scope.repos = response.data;
@@ -59,6 +62,21 @@ angular.module('github-crew.controllers', [])
            }
          }
       };
+
+      $scope.follow = function(){
+         if($scope.profile){
+           PeopleService.follow($scope.profile.login, $rootScope.token).then(
+               function(response){
+                     $rootScope.people.splice($rootScope.people.indexOf($scope.profile), 1);
+                     $scope.enableButton = false;
+               }, function(data){
+                 $ionicPopup.alert({
+                    title: 'github-crew',
+                    template: 'error following profile'
+                  });
+             })
+         }
+      }
 
       $scope.showProfile();
 });

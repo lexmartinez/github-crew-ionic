@@ -14,7 +14,7 @@
   <div class="item item-image">
     <img ng-src="{{profile.avatar_url}}">
 
-    <button class="button button-block button-light" style="color:#2980b9">
+    <button class="button button-block button-light" style="color:#2980b9" ng-disabled="!enableButton" ng-click="follow()">
       <i class="icon ion-ios-checkmark"></i>&nbsp;Follow Profile
     </button>
   </div>
