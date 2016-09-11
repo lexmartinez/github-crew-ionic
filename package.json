@@ -1,7 +1,7 @@
 {
   "name": "github-crew-ionic",
-  "version": "1.1.1",
-  "description": "github-crew-ionic: An Ionic project",
+  "version": "0.0.1",
+  "description": "Github People Advisor: Find interesting and known people profiles on Github",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
