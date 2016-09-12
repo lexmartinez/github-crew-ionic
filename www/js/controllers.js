@@ -1,16 +1,54 @@
 angular.module('github-crew.controllers', [])
 
-.controller('AboutCtrl', function($scope) {})
 
-.controller('PeopleCtrl', function($scope, $rootScope, $ionicPopup,  PeopleService) {
+.controller('AboutCtrl', function($scope, $rootScope, $state) {
+  if(!$rootScope.token){
+     $state.go('login');
+  }
+ })
+
+.controller('PeopleCtrl', function($scope, $state, $http, $cordovaOauth, $rootScope, $ionicPopup,  PeopleService) {
 
   $rootScope.people = [];
   $scope.firtsLoading = true;
-  $rootScope.token = '681a4a8869ab20dfde752b9481e9dcb2b5dacf9653';
-  $rootScope.username = "asdasjndasudasn";
 
   $scope.remove = function(profile) {
     $rootScope.people.splice($rootScope.people.indexOf(profile), 1);
+  };
+
+  $scope.login = function(){
+
+    $cordovaOauth.github("15d50f176b32e8b4f00f", "13cbfeb2f7f0139d1c6b6d1771485dfa17de3bcb",["user"]).then(function(result) {
+
+      $http.get("https://api.github.com/user", {params: {access_token: result.access_token }})
+     .then(function(res) {
+
+       $rootScope.token = result.access_token;
+       $rootScope.username = res.data.login;
+       $state.go('tab.people');
+       $scope.refreshPeopleData();
+
+     }, function(error) {
+       $ionicPopup.alert({
+          title: 'github-crew',
+          template: error
+        });
+     });
+
+ },function(error) {
+   $ionicPopup.alert({
+      title: 'github-crew',
+      template: error
+    });
+   });
+
+  };
+
+  $scope.logout = function(){
+    $rootScope.token = undefined;
+    $rootScope.username = undefined;
+    $state.go('login');
+    $rootScope.people = [];
   };
 
   $scope.refreshPeopleData = function(){
@@ -23,21 +61,28 @@ angular.module('github-crew.controllers', [])
              template: 'error loading people list'
            });
       }).finally(function() {
-       $scope.$broadcast('scroll.refreshComplete');
        if($scope.firtsLoading){
          $scope.firtsLoading = false;
        }
+       $scope.$broadcast('scroll.refreshComplete');
      });
   };
 
-  $scope.refreshPeopleData();
+  if(!$rootScope.token){
+     $state.go('login');
+  }
+
 })
 
-.controller('ProfileDetailCtrl', function($scope, $http, $rootScope, $ionicPopup, $stateParams, PeopleService) {
+.controller('ProfileDetailCtrl', function($scope, $state, $http, $rootScope, $ionicPopup, $stateParams, PeopleService) {
 
       $scope.profile = {};
       $scope.repos = [];
       $scope.enableButton = false;
+
+      if(!$rootScope.token){
+         $state.go('login');
+      }
 
       $scope.showProfile = function(){
         $scope.repos = [];

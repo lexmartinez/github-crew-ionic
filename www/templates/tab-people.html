@@ -1,10 +1,15 @@
 <ion-view view-title="People">
+  <ion-nav-buttons side="secondary">
+        <button class="button button-clear button-positive" ng-click="logout()">
+          Logout
+        </button>
+      </ion-nav-buttons>
   <ion-content>
     <ion-refresher
       pulling-text="Pull to refresh..."
           on-refresh="refreshPeopleData()">
    </ion-refresher>
-   <ion-spinner ng-if="firtsLoading" class="centered-spinner scroll"></ion-spinner>
+   <!--<center><ion-spinner ng-if="firtsLoading" style="margin-top:10px"></ion-spinner></center>-->
     <ion-list ng-if="!firstLoading">
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="profile in people" type="item-text-wrap" href="#/tab/people/{{profile.id}}">
         <img ng-src="{{profile.avatar_url}}">

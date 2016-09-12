@@ -1,5 +1,5 @@
 
-angular.module('github-crew', ['ionic', 'github-crew.controllers', 'github-crew.services'])
+angular.module('github-crew', ['ionic', 'github-crew.controllers', 'github-crew.services','ngCordova','ngCordovaOauth'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -20,11 +20,23 @@ angular.module('github-crew', ['ionic', 'github-crew.controllers', 'github-crew.
 
   $stateProvider
 
+  .state('login', {
+  url: '/login',
+  templateUrl: 'templates/login.html',
+  controller:'PeopleCtrl'
+  })
+
     .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
   })
+
+  .state('auth', {
+  url: '/callback',
+  abstract: true,
+  templateUrl: 'templates/tabs.html'
+})
 
   .state('tab.people', {
     url: '/people',
@@ -55,6 +67,6 @@ angular.module('github-crew', ['ionic', 'github-crew.controllers', 'github-crew.
       }
     });
 
-  $urlRouterProvider.otherwise('/tab/people');
+  $urlRouterProvider.otherwise('/login');
 
 });
