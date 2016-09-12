@@ -12,35 +12,47 @@ angular.module('github-crew.controllers', [])
   $rootScope.people = [];
   $scope.firtsLoading = true;
 
+  //TURN THS VARIABLE ON FALSE WHEN PRODUCTION BUILD IS REQUIRED
+  $scope.devMode = false;
+
   $scope.remove = function(profile) {
     $rootScope.people.splice($rootScope.people.indexOf(profile), 1);
   };
 
   $scope.login = function(){
 
-    $cordovaOauth.github("15d50f176b32e8b4f00f", "13cbfeb2f7f0139d1c6b6d1771485dfa17de3bcb",["user"]).then(function(result) {
+     if(!$scope.devMode){
+
+      $cordovaOauth.github("15d50f176b32e8b4f00f", "13cbfeb2f7f0139d1c6b6d1771485dfa17de3bcb",["user"]).then(function(result) {
 
       $http.get("https://api.github.com/user", {params: {access_token: result.access_token }})
-     .then(function(res) {
+           .then(function(res) {
 
-       $rootScope.token = result.access_token;
-       $rootScope.username = res.data.login;
-       $state.go('tab.people');
-       $scope.refreshPeopleData();
+             $rootScope.token = result.access_token;
+             $rootScope.username = res.data.login;
+             $state.go('tab.people');
+             $scope.refreshPeopleData();
 
-     }, function(error) {
-       $ionicPopup.alert({
-          title: 'github-crew',
-          template: error
-        });
-     });
+           }, function(error) {
+             $ionicPopup.alert({
+                title: 'github-crew',
+                template: error
+              });
+           });
 
- },function(error) {
-   $ionicPopup.alert({
-      title: 'github-crew',
-      template: error
-    });
-   });
+         },function(error) {
+           $ionicPopup.alert({
+              title: 'github-crew',
+              template: error
+            });
+           });
+
+      }else{
+        $rootScope.token = 'result.access_token';
+        $rootScope.username = 'res.data.login';
+        $state.go('tab.people');
+        $scope.refreshPeopleData();
+      }
 
   };
 
