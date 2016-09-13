@@ -29,6 +29,7 @@ angular.module('github-crew.controllers', [])
            .then(function(res) {
 
              $rootScope.token = result.access_token;
+             $rootScope.userData = res.data;
              $rootScope.username = res.data.login;
              $state.go('tab.people');
              $scope.refreshPeopleData();
@@ -50,6 +51,7 @@ angular.module('github-crew.controllers', [])
       }else{
         $rootScope.token = 'result.access_token';
         $rootScope.username = 'res.data.login';
+        $rootScope.userData = {};
         $state.go('tab.people');
         $scope.refreshPeopleData();
       }
@@ -59,6 +61,7 @@ angular.module('github-crew.controllers', [])
   $scope.logout = function(){
     $rootScope.token = undefined;
     $rootScope.username = undefined;
+    $rootScope.userData = undefined;
     $state.go('login');
     $rootScope.people = [];
   };
