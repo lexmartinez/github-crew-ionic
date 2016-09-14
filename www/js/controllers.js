@@ -49,10 +49,24 @@ angular.module('github-crew.controllers', [])
            });
 
       }else{
-        $rootScope.token = 'result.access_token';
-        $rootScope.username = 'res.data.login';
-        $rootScope.userData = {};
-        $state.go('tab.people');
+        $rootScope.token = '$rootScope.token';
+
+        $http.get("https://api.github.com/user", {params: {access_token: $rootScope.token  }})
+             .then(function(res) {
+
+               $rootScope.userData = res.data;
+               $rootScope.username = res.data.login;
+               $state.go('tab.profile');
+               $scope.refreshPeopleData();
+
+             }, function(error) {
+               $ionicPopup.alert({
+                  title: 'github-crew',
+                  template: error
+                });
+             });
+
+        $state.go('tab.profile');
         $scope.refreshPeopleData();
       }
 

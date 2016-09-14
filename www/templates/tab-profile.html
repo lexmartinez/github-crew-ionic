@@ -1,0 +1,26 @@
+<ion-view view-title="Profile">
+  <ion-content class="padding">
+
+    <div class="list card">
+
+      <div class="item item-avatar">
+        <img ng-src="{{userData.avatar_url}}" >
+        <h2>{{userData.name}}</h2>
+        <p>@{{userData.login}}</p>
+      </div>
+
+      <div class="item item-body">
+
+        <div class="item item-image">
+          <img ng-src="{{userData.avatar_url}}">
+        </div>
+        <p align="center">
+          <a href="#" class="subdued dark">Repositories: <b>{{userData.public_repos}}</b></a>
+          <a href="#" class="subdued positive">Following: <b>{{userData.following}}</b></a>
+          <a href="#" class="subdued positive">Followers: <b>{{userData.followers}}</b></a>
+        </p>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

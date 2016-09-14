@@ -9,7 +9,7 @@
       pulling-text="Pull to refresh..."
           on-refresh="refreshPeopleData()">
    </ion-refresher>
-   <!--<center><ion-spinner ng-if="firtsLoading" style="margin-top:10px"></ion-spinner></center>-->
+  <!--<center><ion-spinner ng-if="firtsLoading" style="margin-top:10px"></ion-spinner></center>-->
     <ion-list ng-if="!firstLoading">
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="profile in people" type="item-text-wrap" href="#/tab/people/{{profile.id}}">
         <img ng-src="{{profile.avatar_url}}">

@@ -57,6 +57,15 @@ angular.module('github-crew', ['ionic', 'github-crew.controllers', 'github-crew.
         }
       }
     })
+    .state('tab.profile', {
+        url: '/profile',
+        views: {
+          'tab-profile': {
+            templateUrl: 'templates/tab-profile.html',
+            controller: 'PeopleCtrl'
+          }
+        }
+      })
     .state('tab.profile-detail', {
       url: '/people/:peopleId',
       views: {
