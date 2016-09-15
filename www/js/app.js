@@ -21,22 +21,22 @@ angular.module('github-crew', ['ionic', 'github-crew.controllers', 'github-crew.
   $stateProvider
 
   .state('login', {
-  url: '/login',
-  templateUrl: 'templates/login.html',
-  controller:'PeopleCtrl'
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller:'PeopleCtrl'
   })
 
-    .state('tab', {
+  .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
   })
 
   .state('auth', {
-  url: '/callback',
-  abstract: true,
-  templateUrl: 'templates/tabs.html'
-})
+    url: '/callback',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  })
 
   .state('tab.people', {
     url: '/people',
@@ -49,32 +49,32 @@ angular.module('github-crew', ['ionic', 'github-crew.controllers', 'github-crew.
   })
 
   .state('tab.about', {
-      url: '/about',
-      views: {
-        'tab-about': {
-          templateUrl: 'templates/tab-about.html',
-          controller: 'AboutCtrl'
-        }
+    url: '/about',
+    views: {
+      'tab-about': {
+        templateUrl: 'templates/tab-about.html',
+        controller: 'AboutCtrl'
       }
-    })
-    .state('tab.profile', {
-        url: '/profile',
-        views: {
-          'tab-profile': {
-            templateUrl: 'templates/tab-profile.html',
-            controller: 'PeopleCtrl'
-          }
-        }
-      })
-    .state('tab.profile-detail', {
-      url: '/people/:peopleId',
-      views: {
-        'tab-people': {
-          templateUrl: 'templates/profile-detail.html',
-          controller: 'ProfileDetailCtrl'
-        }
+    }
+  })
+  .state('tab.profile', {
+    url: '/profile',
+    views: {
+      'tab-profile': {
+        templateUrl: 'templates/tab-profile.html',
+        controller: 'PeopleCtrl'
       }
-    });
+    }
+  })
+  .state('tab.profile-detail', {
+    url: '/people/:peopleId',
+    views: {
+      'tab-people': {
+        templateUrl: 'templates/profile-detail.html',
+        controller: 'ProfileDetailCtrl'
+      }
+    }
+  });
 
   $urlRouterProvider.otherwise('/login');
 

@@ -7,13 +7,16 @@ angular.module('github-crew.services', [])
       return $http.get('https://github-crew.herokuapp.com/api/advisor/'+username+'?access_token='+token+'&max=10');
     },
     repos:function(url){
-        return $http.get(url);
+      return $http.get(url);
     },
     follow:function(profile, token){
-        return $http({
-          method: 'PUT',
-          url: 'https://api.github.com/user/following/'+profile+'?access_token='+token
-        });
+      return $http({
+        method: 'PUT',
+        url: 'https://api.github.com/user/following/'+profile+'?access_token='+token
+      });
+    },
+    user:function(token){
+      return $http.get("https://api.github.com/user", {params: {access_token: token }});
     }
   };
 });
