@@ -6,7 +6,7 @@ Front-end of previous project [github-crew](https://github.com/lexmartinez/githu
 
 ## Project Setup
 
-`github-crew-ionic` is a tipical `Ionic` hibrid application we assumed that you're familiarized with this framework, otherwise it is here where you should start [ionic-getting-started](http://ionicframework.com/getting-started/)
+`github-crew-ionic` is a typical `Ionic` hybrid application we assumed that you're familiarized with this framework, otherwise it is here where you should start [ionic-getting-started](http://ionicframework.com/getting-started/)
 
 With an Ionic Environment installed, use this commands to run `github-crew-ionic`
 
